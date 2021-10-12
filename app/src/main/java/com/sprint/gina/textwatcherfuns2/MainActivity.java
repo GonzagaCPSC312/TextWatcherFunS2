@@ -3,6 +3,8 @@ package com.sprint.gina.textwatcherfuns2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +35,34 @@ public class MainActivity extends AppCompatActivity {
                     // the user cannot interact with it
                     Toast toast = Toast.makeText(MainActivity.this, "Enter your name first", Toast.LENGTH_LONG);
                     toast.show();
+                }
+            }
+        });
+
+        // we don't actually need the hello button
+        // we can listen for text changed events on the edit text
+        // with the TextWatcher interface
+        // https://developer.android.com/reference/android/text/TextWatcher
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // we can write our code here
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // or here
+                String name = s.toString();
+                if (name.length() > 0) {
+                    textView.setText("Hello, " + name);
+                }
+                else {
+                    textView.setText("");
                 }
             }
         });
